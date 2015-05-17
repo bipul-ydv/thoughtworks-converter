@@ -1,7 +1,7 @@
 package com.thoughtworks.writer;
 
 public class CreditWriter implements Writer {
-    public void output(String line) {
+    public void process(String input) {
 
     }
 }

@@ -13,7 +13,7 @@ public class MerchantConverterApp {
 
     public static void main(String[] args) {
         String input = parseInputFromFilePath(args[0]);
-        log(processInput(input));
+        processInput(input);
     }
 
     public static String parseInputFromFilePath(String filePath) {
@@ -30,12 +30,8 @@ public class MerchantConverterApp {
         }
     }
 
-    public static String processInput(String input) {
-        return inputParser.parse(input);
-    }
-
-    public static void log(String input) {
-        System.out.println(input);
+    public static void processInput(String input) {
+        inputParser.parse(input);
     }
 
     public void setInputParser(InputParser inputParser) {

@@ -1,32 +1,69 @@
 package com.thoughtworks.parser;
 
-import com.thoughtworks.reader.CreditReader;
-import com.thoughtworks.reader.SymbolReader;
+import com.thoughtworks.repository.CreditRepository;
+import com.thoughtworks.repository.Repository;
+import com.thoughtworks.repository.SymbolRepository;
 import com.thoughtworks.writer.CreditWriter;
 import com.thoughtworks.writer.SymbolWriter;
 import com.thoughtworks.writer.UnknownWriter;
+import com.thoughtworks.writer.Writer;
 
 public class InputParser {
-    private SymbolReader symbolReader;
-    private CreditReader creditReader;
+    private static final String WRITER_LINE_PREFIX = "how ";
+    private SymbolRepository symbolRepository;
+    private CreditRepository creditRepository;
     private SymbolWriter symbolWriter;
     private CreditWriter creditWriter;
     private UnknownWriter unknownWriter;
 
-    public String parse(String input) {
-        return input;
+    public void parse(String input) {
+        for (String line : input.split("\\r?\\n")) {
+            normaliseAndParseSingleLine(line);
+        }
     }
 
-    public void parseSingleLine(String input) {
+    public void normaliseAndParseSingleLine(String input) {
+        String normalisedInput = input.toLowerCase().trim();
 
+        if (normalisedInput.startsWith(WRITER_LINE_PREFIX)) {
+            parseWriterLine(normalisedInput);
+        }
+        else {
+            parseRepositoryLine(normalisedInput);
+        }
     }
 
-    public void setSymbolReader(SymbolReader symbolReader) {
-        this.symbolReader = symbolReader;
+    private void parseWriterLine(String input) {
+        Writer writer;
+
+        if (input.startsWith("how much")) {
+            writer = symbolWriter;
+        }
+        else if (input.startsWith("how many")) {
+            writer = creditWriter;
+        }
+        else {
+            writer = unknownWriter;
+        }
+
+        writer.process(input);
     }
 
-    public void setCreditReader(CreditReader creditReader) {
-        this.creditReader = creditReader;
+    private void parseRepositoryLine(String input) {
+        Repository repository;
+
+        if (input.endsWith("credits")) {
+            repository = creditRepository;
+        }
+        else if (input.contains(" is ")) {
+            repository = symbolRepository;
+        }
+        else {
+            unknownWriter.process(input);
+            return;
+        }
+
+        repository.process(input);
     }
 
     public void setSymbolWriter(SymbolWriter symbolWriter) {
@@ -39,5 +76,13 @@ public class InputParser {
 
     public void setUnknownWriter(UnknownWriter unknownWriter) {
         this.unknownWriter = unknownWriter;
+    }
+
+    public void setSymbolRepository(SymbolRepository symbolRepository) {
+        this.symbolRepository = symbolRepository;
+    }
+
+    public void setCreditRepository(CreditRepository creditRepository) {
+        this.creditRepository = creditRepository;
     }
 }

@@ -1,7 +1,7 @@
 package com.thoughtworks.parser;
 
-import com.thoughtworks.reader.CreditReader;
-import com.thoughtworks.reader.SymbolReader;
+import com.thoughtworks.repository.CreditRepository;
+import com.thoughtworks.repository.SymbolRepository;
 import com.thoughtworks.writer.CreditWriter;
 import com.thoughtworks.writer.SymbolWriter;
 import com.thoughtworks.writer.UnknownWriter;
@@ -21,8 +21,8 @@ public class InputParserTest {
     private static final String TEST_INPUT_LINE = "foo";
     private static final String TEST_INPUT_FILE = TEST_INPUT_LINE + "\n" + TEST_INPUT_LINE + "\n" + TEST_INPUT_LINE;
     private InputParser parser;
-    private SymbolReader symbolReader;
-    private CreditReader creditReader;
+    private SymbolRepository symbolRepository;
+    private CreditRepository creditRepository;
     private SymbolWriter symbolWriter;
     private CreditWriter creditWriter;
     private UnknownWriter unknownWriter;
@@ -31,53 +31,57 @@ public class InputParserTest {
     public void setUp() {
         parser = new InputParser();
 
-        symbolReader = mock(SymbolReader.class);
-        creditReader = mock(CreditReader.class);
+        symbolRepository = mock(SymbolRepository.class);
+        creditRepository = mock(CreditRepository.class);
         symbolWriter = mock(SymbolWriter.class);
         creditWriter = mock(CreditWriter.class);
         unknownWriter = mock(UnknownWriter.class);
 
-        parser.setSymbolReader(symbolReader);
-        parser.setCreditReader(creditReader);
+        parser.setSymbolRepository(symbolRepository);
+        parser.setCreditRepository(creditRepository);
         parser.setSymbolWriter(symbolWriter);
         parser.setCreditWriter(creditWriter);
         parser.setUnknownWriter(unknownWriter);
     }
 
     @Test
-    public void shouldParseReadSymbol() {
-        parser.parseSingleLine(TEST_INPUT_READ_SYMBOL);
-        verify(symbolReader).input(TEST_INPUT_READ_SYMBOL);
+    public void shouldAssignSymbolToRepository() {
+        parser.normaliseAndParseSingleLine(TEST_INPUT_READ_SYMBOL);
+        verify(symbolRepository).process(normalise(TEST_INPUT_READ_SYMBOL));
     }
 
     @Test
-    public void shouldParseReadCredit() {
-        parser.parseSingleLine(TEST_INPUT_READ_CREDIT);
-        verify(creditReader).input(TEST_INPUT_READ_CREDIT);
+    public void shouldAssignCreditToRepository() {
+        parser.normaliseAndParseSingleLine(TEST_INPUT_READ_CREDIT);
+        verify(creditRepository).process(normalise(TEST_INPUT_READ_CREDIT));
     }
 
     @Test
-    public void shouldParseWriteSymbol() {
-        parser.parseSingleLine(TEST_INPUT_WRITE_SYMBOL);
-        verify(symbolWriter).output(TEST_INPUT_WRITE_SYMBOL);
+    public void shouldOutputSymbolWriter() {
+        parser.normaliseAndParseSingleLine(TEST_INPUT_WRITE_SYMBOL);
+        verify(symbolWriter).process(normalise(TEST_INPUT_WRITE_SYMBOL));
     }
 
     @Test
-    public void shouldParseWriteCredit() {
-        parser.parseSingleLine(TEST_INPUT_WRITE_CREDIT);
-        verify(creditWriter).output(TEST_INPUT_WRITE_CREDIT);
+    public void shouldOutputCreditWriter() {
+        parser.normaliseAndParseSingleLine(TEST_INPUT_WRITE_CREDIT);
+        verify(creditWriter).process(normalise(TEST_INPUT_WRITE_CREDIT));
     }
 
     @Test
-    public void shouldParseWriteUnknown() {
-        parser.parseSingleLine(TEST_INPUT_WRITE_UNKNOWN);
-        verify(unknownWriter).output(TEST_INPUT_WRITE_UNKNOWN);
+    public void shouldOutputUnknownWriter() {
+        parser.normaliseAndParseSingleLine(TEST_INPUT_WRITE_UNKNOWN);
+        verify(unknownWriter).process(normalise(TEST_INPUT_WRITE_UNKNOWN));
     }
 
     @Test
     public void shouldParseMultipleLines() {
         parser.parse(TEST_INPUT_FILE);
-        verify(unknownWriter, times(3)).output(TEST_INPUT_LINE);
+        verify(unknownWriter, times(3)).process(normalise(TEST_INPUT_LINE));
+    }
+
+    private String normalise(String input) {
+        return input.toLowerCase().trim();
     }
 }
 

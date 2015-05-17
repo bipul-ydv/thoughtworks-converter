@@ -44,11 +44,11 @@ public class MerchantConverterAppTest {
     }
 
     @Test
-    public void shouldCallProcessorAndReturnData() {
+    public void shouldCallParser() {
         InputParser mockInputParser = mock(InputParser.class);
-        when(mockInputParser.parse(testInput)).thenReturn(TEST_DATA);
         app.setInputParser(mockInputParser);
-        assertThat(app.processInput(testInput), is(equalTo(TEST_DATA)));
+        app.processInput(TEST_DATA);
+        verify(mockInputParser).parse(TEST_DATA);
     }
 
     @Test
