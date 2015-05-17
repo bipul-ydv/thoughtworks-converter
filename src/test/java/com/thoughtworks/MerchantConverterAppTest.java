@@ -1,6 +1,6 @@
 package com.thoughtworks;
 
-import com.thoughtworks.processor.ConversionProcessor;
+import com.thoughtworks.parser.InputParser;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,9 +45,9 @@ public class MerchantConverterAppTest {
 
     @Test
     public void shouldCallProcessorAndReturnData() {
-        ConversionProcessor mockProcessor = mock(ConversionProcessor.class);
-        when(mockProcessor.processInput(testInput)).thenReturn(TEST_DATA);
-        app.setConversionProcessor(mockProcessor);
+        InputParser mockInputParser = mock(InputParser.class);
+        when(mockInputParser.parse(testInput)).thenReturn(TEST_DATA);
+        app.setInputParser(mockInputParser);
         assertThat(app.processInput(testInput), is(equalTo(TEST_DATA)));
     }
 

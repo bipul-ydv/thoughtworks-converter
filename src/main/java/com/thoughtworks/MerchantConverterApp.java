@@ -1,6 +1,6 @@
 package com.thoughtworks;
 
-import com.thoughtworks.processor.ConversionProcessor;
+import com.thoughtworks.parser.InputParser;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MerchantConverterApp {
-    private static ConversionProcessor conversionProcessor = new ConversionProcessor();
+    private static InputParser inputParser = new InputParser();
 
     public static void main(String[] args) {
         String input = parseInputFromFilePath(args[0]);
@@ -31,14 +31,14 @@ public class MerchantConverterApp {
     }
 
     public static String processInput(String input) {
-        return conversionProcessor.processInput(input);
-    }
-
-    public void setConversionProcessor(ConversionProcessor conversionProcessor) {
-        this.conversionProcessor = conversionProcessor;
+        return inputParser.parse(input);
     }
 
     public static void log(String input) {
         System.out.println(input);
+    }
+
+    public void setInputParser(InputParser inputParser) {
+        this.inputParser = inputParser;
     }
 }
