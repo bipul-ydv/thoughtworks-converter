@@ -21,7 +21,7 @@ You decided to give up on earth after the latest financial collapse left 99.99% 
 Buying and selling over the galaxy requires you to convert numbers and units, and you decided to write a program to help you.
 The numbers used for intergalactic transactions follows similar convention to the Roman numerals and you have painstakingly collected the appropriate translation between them.
 
-** Basics **
+**Basics**
 
 * Assign Symbols (Roman numerals) to variables
 * Assign Credits (decimals) to variables
