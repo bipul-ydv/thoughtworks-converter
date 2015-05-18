@@ -47,13 +47,13 @@ public class InputParserTest {
     @Test
     public void shouldAssignSymbolToRepository() {
         parser.normaliseAndParseSingleLine(TEST_INPUT_READ_SYMBOL);
-        verify(symbolRepository).process(normalise(TEST_INPUT_READ_SYMBOL));
+        verify(symbolRepository).put(normalise(TEST_INPUT_READ_SYMBOL));
     }
 
     @Test
     public void shouldAssignCreditToRepository() {
         parser.normaliseAndParseSingleLine(TEST_INPUT_READ_CREDIT);
-        verify(creditRepository).process(normalise(TEST_INPUT_READ_CREDIT));
+        verify(creditRepository).put(normalise(TEST_INPUT_READ_CREDIT));
     }
 
     @Test

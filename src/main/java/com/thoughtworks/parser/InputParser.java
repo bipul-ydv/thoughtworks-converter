@@ -67,7 +67,7 @@ public class InputParser {
             return;
         }
 
-        repository.process(input);
+        repository.put(input);
     }
 
     public void setSymbolWriter(SymbolWriter symbolWriter) {

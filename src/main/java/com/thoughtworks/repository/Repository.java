@@ -1,5 +1,7 @@
 package com.thoughtworks.repository;
 
 public interface Repository {
-    void process(String input);
+    void put(String input);
+
+    String get(String key);
 }
