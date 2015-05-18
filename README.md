@@ -72,10 +72,11 @@ Three separate ways to run -- all equivalent.
 2. Navigate to the ZIP folder directory: /thoughtworks-converter/target/classes
 3. Run: java com.thoughtworks.MerchantConverterApp "/path/to/your/input/file"
 
-Sample:
+__Sample:__
 
 $ pwd
 /Users/me/projects/thoughtworks-converter/target/classes
+
 $ java com.thoughtworks.MerchantConverterApp "/Users/me/projects/thoughtworks-converter/src/test/resources/test-input.txt"
 
 ## Load project in IDEA and run integration test
