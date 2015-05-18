@@ -20,6 +20,17 @@ public class InputParser {
     private CreditWriter creditWriter;
     private UnknownWriter unknownWriter;
 
+    public InputParser() {
+        symbolRepository = new SymbolRepository();
+        creditRepository = new CreditRepository();
+        symbolWriter = new SymbolWriter();
+        creditWriter = new CreditWriter();
+        unknownWriter = new UnknownWriter();
+
+        // Only one instance of the store
+        creditRepository.setSymbolRepository(symbolRepository);
+    }
+
     public void parse(String input) {
         for (String line : input.split("\\r?\\n")) {
             normaliseAndParseSingleLine(line);

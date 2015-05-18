@@ -12,6 +12,10 @@ public class CreditRepository implements Repository {
     private SymbolRepository symbolRepository;
     private SymbolInterpreter symbolInterpreter;
 
+    public CreditRepository() {
+        symbolInterpreter = new SymbolInterpreter();
+    }
+
     public String get(String key) {
         return credits.get(key).toString();
     }
