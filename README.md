@@ -50,6 +50,7 @@ The numbers used for intergalactic transactions follows similar convention to th
 * Use of Repository and Writer interfaces for polymorphism of common functions with different implementations
 * Credits are stored assuming a quantity of 1 -- this is then multiplied as required for output
 * Credits are stored as BigDecimal, but output with no decimal places (in order to conform to test output)
+* Writers are in control of output implementation (currently System.out) to reduce data bubbling and allow flexibility
 
 # Enhancements
 
