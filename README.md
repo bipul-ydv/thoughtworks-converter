@@ -64,4 +64,33 @@ The numbers used for intergalactic transactions follows similar convention to th
 
 # How to Run
 
-1. java MerchantConverterApp
+Three separate ways to run -- all equivalent.
+
+## Terminal
+
+1. Open Terminal or Console
+2. Navigate to the ZIP folder directory: /thoughtworks-converter/target/classes
+3. Run: java com.thoughtworks.MerchantConverterApp "/path/to/your/input/file"
+
+Sample:
+
+$ pwd
+/Users/me/projects/thoughtworks-converter/target/classes
+$ java com.thoughtworks.MerchantConverterApp "/Users/me/projects/thoughtworks-converter/src/test/resources/test-input.txt"
+
+## Load project in IDEA and run integration test
+
+1. Import the project in IDEA
+2. Use Maven to download any dependencies
+3. Open the MerchantConverterAppIntegrationTest class
+4. Modify the FULL_INPUT_PATH variable to that on your machine
+5. Right click the class and select 'Run' to launch the test
+
+## Load project in IDEA and specify a Run Configuration
+
+1. Import the project in IDEA
+2. Use Maven to download any dependencies
+3. Open the MerchantConverterApp class
+4. In the toolbar select Run > Edit Configurations
+5. Add a new 'Application' run type, com.thoughtworks.MerchantConverterApp as the class, and input file path as the program arguments
+6. Run the configuration
