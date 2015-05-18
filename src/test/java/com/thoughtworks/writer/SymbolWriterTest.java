@@ -25,7 +25,7 @@ public class SymbolWriterTest {
         when(symbolRepository.get("ten")).thenReturn("X");
         when(symbolRepository.get("fifty")).thenReturn("L");
 
-        writer.setRepository(symbolRepository);
+        writer.setSymbolRepository(symbolRepository);
 
         System.setOut(mockPrintStream);
     }

@@ -1,15 +1,18 @@
 package com.thoughtworks.writer;
 
 import com.thoughtworks.interpreter.SymbolInterpreter;
+import com.thoughtworks.repository.CreditRepository;
 import com.thoughtworks.repository.Repository;
+import com.thoughtworks.repository.SymbolRepository;
 import com.thoughtworks.util.RepositoryUtil;
+import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 public class SymbolWriter implements Writer {
     private static final String PREFIX = "how much is ";
     private static final String SUFFIX = " ?";
     private static final java.lang.String DELIMITER = " ";
-    private Repository repository;
     private SymbolInterpreter symbolInterpreter;
+    private SymbolRepository symbolRepository;
 
     public SymbolWriter() {
         symbolInterpreter = new SymbolInterpreter();
@@ -17,7 +20,7 @@ public class SymbolWriter implements Writer {
 
     public void process(String input) {
         String variables = extractVariablesFromInput(input);
-        String symbols = RepositoryUtil.lookupSymbolsFromVariables(repository, variables.split(DELIMITER));
+        String symbols = RepositoryUtil.lookupSymbolsFromVariables(symbolRepository, variables.split(DELIMITER));
         writeOutput(variables, symbols);
     }
 
@@ -29,7 +32,10 @@ public class SymbolWriter implements Writer {
         System.out.println(variables + " is " + symbolInterpreter.interpret(symbols));
     }
 
-    public void setRepository(Repository repository) {
-        this.repository = repository;
+    public void setSymbolRepository(SymbolRepository symbolRepository) {
+        this.symbolRepository = symbolRepository;
+    }
+
+    public void setCreditRepository(CreditRepository creditRepository) {
     }
 }

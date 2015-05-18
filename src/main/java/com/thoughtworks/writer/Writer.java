@@ -1,9 +1,12 @@
 package com.thoughtworks.writer;
 
-import com.thoughtworks.repository.Repository;
+import com.thoughtworks.repository.CreditRepository;
+import com.thoughtworks.repository.SymbolRepository;
 
 public interface Writer {
     void process(String input);
 
-    void setRepository(Repository repository);
+    void setSymbolRepository(SymbolRepository symbolRepository);
+
+    void setCreditRepository(CreditRepository creditRepository);
 }
