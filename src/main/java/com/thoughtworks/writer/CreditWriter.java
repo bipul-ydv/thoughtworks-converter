@@ -6,6 +6,7 @@ import com.thoughtworks.repository.SymbolRepository;
 import com.thoughtworks.util.RepositoryUtil;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class CreditWriter implements Writer {
@@ -35,6 +36,7 @@ public class CreditWriter implements Writer {
 
     private void writeOutput(String variables, String key, String symbols) {
         BigDecimal credits = new BigDecimal(creditRepository.get(key)).multiply(symbolInterpreter.interpret(symbols));
+        credits = credits.setScale(0);
         System.out.println(variables + " is " + credits.toString() + " Credits");
     }
 

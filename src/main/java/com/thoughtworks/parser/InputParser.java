@@ -10,10 +10,10 @@ import com.thoughtworks.writer.Writer;
 
 public class InputParser {
     private static final String WRITER_LINE_PREFIX = "how ";
-    private static final String REGEX_SET_SYMBOL = "^[a-z]+( is )(i|v|x|l|c|d|m)$";
-    private static final String REGEX_SET_CREDIT = "^[a-z ]*[a-z]+( is )[0-9]+( credits)$";
-    private static final String REGEX_OUTPUT_SYMBOL = "^(how much is )[a-z ]+(\\?)$";
-    private static final String REGEX_OUTPUT_CREDIT = "^(how many credits is )[a-z ]+(\\?)$";
+    private static final String REGEX_SET_SYMBOL = "^[a-zA-Z]+( is )(I|V|X|L|C|D|M)$";
+    private static final String REGEX_SET_CREDIT = "^[a-zA-Z ]*[a-zA-Z]+( is )[0-9]+( Credits)$";
+    private static final String REGEX_OUTPUT_SYMBOL = "^(how much is )[a-zA-Z ]+(\\?)$";
+    private static final String REGEX_OUTPUT_CREDIT = "^(how many Credits is )[a-zA-Z ]+(\\?)$";
     private SymbolRepository symbolRepository;
     private CreditRepository creditRepository;
     private SymbolWriter symbolWriter;
@@ -27,8 +27,10 @@ public class InputParser {
         creditWriter = new CreditWriter();
         unknownWriter = new UnknownWriter();
 
-        // Only one instance of the store
         creditRepository.setSymbolRepository(symbolRepository);
+        symbolWriter.setSymbolRepository(symbolRepository);
+        creditWriter.setSymbolRepository(symbolRepository);
+        creditWriter.setCreditRepository(creditRepository);
     }
 
     public void parse(String input) {
@@ -38,7 +40,7 @@ public class InputParser {
     }
 
     public void normaliseAndParseSingleLine(String input) {
-        String normalisedInput = input.toLowerCase().trim();
+        String normalisedInput = input.trim();
 
         if (normalisedInput.startsWith(WRITER_LINE_PREFIX)) {
             parseWriterLine(normalisedInput);

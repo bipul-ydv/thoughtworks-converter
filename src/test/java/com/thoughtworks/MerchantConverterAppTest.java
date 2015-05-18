@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -16,7 +15,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class MerchantConverterAppTest {
     private static final String TEST_INPUT_PATH = "test-input.txt";
@@ -49,16 +47,5 @@ public class MerchantConverterAppTest {
         app.setInputParser(mockInputParser);
         app.processInput(TEST_DATA);
         verify(mockInputParser).parse(TEST_DATA);
-    }
-
-    @Test
-    public void shouldOutputIntegrationTest() {
-        PrintStream mockPrintStream = mock(PrintStream.class);
-        System.setOut(mockPrintStream);
-
-        app.main(new String[]{TEST_INPUT_PATH});
-        verify(mockPrintStream).println(testOutput);
-
-        System.setOut(null);
     }
 }

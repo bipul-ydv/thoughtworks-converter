@@ -18,6 +18,10 @@ public class CreditRepository implements Repository {
     }
 
     public String get(String key) {
+        if (credits.get(key) == null) {
+            return null;
+        }
+
         return credits.get(key).toString();
     }
 

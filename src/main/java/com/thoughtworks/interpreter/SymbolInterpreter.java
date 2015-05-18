@@ -31,7 +31,7 @@ public class SymbolInterpreter {
 
     private void validateInput(String input) {
         if (!input.matches(REGEX_SYMBOLS)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid symbol in the input: " + input);
         }
     }
 

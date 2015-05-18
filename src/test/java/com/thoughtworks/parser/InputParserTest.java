@@ -81,7 +81,7 @@ public class InputParserTest {
     }
 
     private String normalise(String input) {
-        return input.toLowerCase().trim();
+        return input.trim();
     }
 }
 
