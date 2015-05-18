@@ -36,11 +36,11 @@ The numbers used for intergalactic transactions follows similar convention to th
 * Tools: IDEA 14 (static code analysis) and Git (local)
 * System components:
  * MerchantConverterApp: Runnable, loads input file and passes to Parser
-** InputParser: Parses each line and calls relevant Repository and Writer interface function
-** Repository: Interface and concrete implementations for setting Symbols (i.e. Roman numerals) or Credits
-** Writer: Interface and concrete implementations for getting and outputting Symbols or Credits
-** SymbolInterpreter: Conversion from Roman to Arabic numerals
-** RepositoryUtil: Helper method used by different classes
+ * InputParser: Parses each line and calls relevant Repository and Writer interface function
+ * Repository: Interface and concrete implementations for setting Symbols (i.e. Roman numerals) or Credits
+ * Writer: Interface and concrete implementations for getting and outputting Symbols or Credits
+ * SymbolInterpreter: Conversion from Roman to Arabic numerals
+ * RepositoryUtil: Helper method used by different classes
 
 # Design and Assumptions
 
