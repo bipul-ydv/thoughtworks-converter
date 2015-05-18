@@ -32,11 +32,12 @@ The numbers used for intergalactic transactions follows similar convention to th
 
 # Overview
 
-* TDD using JUnit, Hamcrest and Mockito (92% coverage). Unit and integration testing -- passes supplied test data.
+* TDD using JUnit, Hamcrest, Mockito and PowerMockito (92% coverage). Unit and integration testing -- passes supplied test data.
 * Tools: IDEA 14 (static code analysis) and Git (local)
 * System components:
  * MerchantConverterApp: Runnable, loads input file and passes to Parser
  * InputParser: Parses each line and calls relevant Repository and Writer interface function
+ * Factories: Repository and Writer factories for obtaining the correct concrete implementation based on regex or name
  * Repository: Interface and concrete implementations for setting Symbols (i.e. Roman numerals) or Credits
  * Writer: Interface and concrete implementations for getting and outputting Symbols or Credits
  * SymbolInterpreter: Conversion from Roman to Arabic numerals
@@ -51,6 +52,7 @@ The numbers used for intergalactic transactions follows similar convention to th
 * Credits are stored assuming a quantity of 1 -- this is then multiplied as required for output
 * Credits are stored as BigDecimal, but output with no decimal places (in order to conform to test output)
 * Writers are in control of output implementation (currently System.out) to reduce data bubbling and allow flexibility
+* Unit tests for InputParser (trouble getting PowerMockito to work with my legacy version of JUnit...ran out of time)
 
 # Enhancements
 
@@ -59,7 +61,6 @@ The numbers used for intergalactic transactions follows similar convention to th
 * Better name for 'Repository' (not happy with it)
 * Increased validation (e.g. case insensitive, boundary conditions, invalid data in correct format) and error handling
 * Integration test not to have a hard-coded file path
-* Factory for selecting Repository and Writer objects
 
 # How to Run
 
