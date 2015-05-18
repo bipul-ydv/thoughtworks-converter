@@ -27,7 +27,7 @@ public class MerchantConverterAppIntegrationTest {
         System.setOut(mockPrintStream);
 
         MerchantConverterApp app = new MerchantConverterApp();
-        app.main(new String[]{FULL_INPUT_PATH});
+        MerchantConverterApp.main(new String[]{FULL_INPUT_PATH});
     }
 
     @After

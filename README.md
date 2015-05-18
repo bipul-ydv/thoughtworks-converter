@@ -1,5 +1,5 @@
 Code coverage: 92%
-Static code analysis
+Static code analysis: IDEA
 Integration test run separate!
 Don't love my naming of 'repository'
 Test private (protected) functions in CreditRepository? Not TDD -- came later.

@@ -37,7 +37,7 @@ public class MerchantConverterAppTest {
 
     @Test
     public void shouldParseInputFromFile() {
-        String input = app.parseInputFromFilePath(TEST_INPUT_PATH);
+        String input = MerchantConverterApp.parseInputFromFilePath(TEST_INPUT_PATH);
         assertThat(input, is(equalTo(testInput)));
     }
 
@@ -45,7 +45,7 @@ public class MerchantConverterAppTest {
     public void shouldCallParser() {
         InputParser mockInputParser = mock(InputParser.class);
         app.setInputParser(mockInputParser);
-        app.processInput(TEST_DATA);
+        MerchantConverterApp.processInput(TEST_DATA);
         verify(mockInputParser).parse(TEST_DATA);
     }
 }

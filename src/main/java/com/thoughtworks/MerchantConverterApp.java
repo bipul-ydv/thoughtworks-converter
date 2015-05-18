@@ -47,6 +47,6 @@ public class MerchantConverterApp {
     }
 
     public void setInputParser(InputParser inputParser) {
-        this.inputParser = inputParser;
+        MerchantConverterApp.inputParser = inputParser;
     }
 }
