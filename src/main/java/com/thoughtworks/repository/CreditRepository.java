@@ -1,6 +1,7 @@
 package com.thoughtworks.repository;
 
 import com.thoughtworks.interpreter.SymbolInterpreter;
+import com.thoughtworks.util.RepositoryUtil;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -45,18 +46,8 @@ public class CreditRepository implements Repository {
     }
 
     private BigDecimal getDecimalFromVariables(String[] variables) {
-        String symbols = lookupSymbolsFromVariables(variables);
+        String symbols = RepositoryUtil.lookupSymbolsFromVariables(symbolRepository, variables);
         return getNumberFromSymbols(symbols);
-    }
-
-    private String lookupSymbolsFromVariables(String[] keys) {
-        StringBuffer symbols = new StringBuffer();
-
-        for (String key : keys) {
-            symbols.append(symbolRepository.get(key));
-        }
-
-        return symbols.toString();
     }
 
     private BigDecimal getNumberFromSymbols(String symbols) {
