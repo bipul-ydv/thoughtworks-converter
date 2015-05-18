@@ -2,10 +2,8 @@ package com.thoughtworks.writer;
 
 import com.thoughtworks.interpreter.SymbolInterpreter;
 import com.thoughtworks.repository.CreditRepository;
-import com.thoughtworks.repository.Repository;
 import com.thoughtworks.repository.SymbolRepository;
 import com.thoughtworks.util.RepositoryUtil;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 public class SymbolWriter implements Writer {
     private static final String PREFIX = "how much is ";

@@ -23,6 +23,8 @@ public class MerchantConverterApp {
         }
         catch (IOException e) {
             try {
+                // Ugly using try/catch for program flow, but support for absolute and relative resource paths
+                // useful for unit testing
                 return attemptToLoadFileFromResource(filePath);
             }
             catch (URISyntaxException e1) {
@@ -32,7 +34,6 @@ public class MerchantConverterApp {
                 e1.printStackTrace();
             }
 
-            System.out.println("Could not load file from path: " + filePath);
             return null;
         }
     }

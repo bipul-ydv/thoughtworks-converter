@@ -44,9 +44,9 @@ public class CreditRepository implements Repository {
     private void processArgumentsAndPutToMap(String[] args, int anchorPos) {
         String key = args[anchorPos - 1];
         BigDecimal value = new BigDecimal(args[anchorPos + 1]);
-        BigDecimal multipler = getDecimalFromVariables(Arrays.copyOfRange(args, 0, anchorPos - 1));
+        BigDecimal multiplier = getDecimalFromVariables(Arrays.copyOfRange(args, 0, anchorPos - 1));
 
-        credits.put(key, value.divide(multipler));
+        credits.put(key, value.divide(multiplier));
     }
 
     private BigDecimal getDecimalFromVariables(String[] variables) {

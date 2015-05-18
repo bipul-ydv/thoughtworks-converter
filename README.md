@@ -1,6 +1,8 @@
 # About
 
-Coding test for ThoughtWorks. Rules:
+Coding test for ThoughtWorks. Took approximately 10 hours over 2 days to complete.
+
+# Rules
 
 1. Submit the solution to only one problem
 2. Java, Ruby, C#, Python, Clojure, Scala or JavaScript
@@ -28,14 +30,36 @@ The numbers used for intergalactic transactions follows similar convention to th
 * Convert from Roman numerals to decimal
 * Handle invalid queries appropriately
 
-# Comments
+# Overview
 
-Code coverage: 92%
-Static code analysis: IDEA
-Integration test run separate!
-Don't love my naming of 'repository'
-Test private (protected) functions in CreditRepository? Not TDD -- came later.
-Invalid roman: VVV, LLL, DDD
-better validation (e.g. filepath) and error handling, boundary conditions, invalid data correct format (e.g. non assigned vars)
-input strings not case insensitive
-creditwriter rounding scale 0 decimals...
+* TDD using JUnit, Hamcrest and Mockito (92% coverage). Unit and integration testing -- passes supplied test data.
+* Tools: IDEA 14 (static code analysis) and Git (local)
+* System components:
+** MerchantConverterApp: Runnable, loads input file and passes to Parser
+** InputParser: Parses each line and calls relevant Repository and Writer interface function
+** Repository: Interface and concrete implementations for setting Symbols (i.e. Roman numerals) or Credits
+** Writer: Interface and concrete implementations for getting and outputting Symbols or Credits
+** SymbolInterpreter: Conversion from Roman to Arabic numerals
+** RepositoryUtil: Helper method used by different classes
+
+# Design and Assumptions
+
+* Maven project with pom.xml for dependency management (testing libraries)
+* 'Clean Code' principles (e.g. naming, only necessary code comments, DRY, SRP, small functions, avoid magic numbers...)
+* In Roman numerals VVV, LLL and DDD are invalid, which is reflected in the Interpreter.
+* Use of Repository and Writer interfaces for polymorphism of common functions with different implementations
+* Credits are stored assuming a quantity of 1 -- this is then multiplied as required for output
+* Credits are stored as BigDecimal, but output with no decimal places (in order to conform to test output)
+
+# Enhancements
+
+* String interpolation instead of concatenation
+* Additional unit tests for private functions (change to protected). Underlying implementation so not tested-first with TDD.
+* Better name for 'Repository' (not happy with it)
+* Increased validation (e.g. case insensitive, boundary conditions, invalid data in correct format) and error handling
+* Integration test not to have a hard-coded file path
+* Factory for selecting Repository and Writer objects
+
+# How to Run
+
+1. java MerchantConverterApp

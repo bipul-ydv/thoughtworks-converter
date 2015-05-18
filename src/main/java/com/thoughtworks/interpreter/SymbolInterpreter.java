@@ -25,7 +25,7 @@ public class SymbolInterpreter {
 
     public BigDecimal interpret(String input) {
         validateInput(input);
-        String decimalString = convertToDecimalStringWithSpaces(input);
+        String decimalString = convertToDecimalStringWithSpacesBetween(input);
         return sumDecimalString(decimalString);
     }
 
@@ -35,7 +35,7 @@ public class SymbolInterpreter {
         }
     }
 
-    private String convertToDecimalStringWithSpaces(String input) {
+    private String convertToDecimalStringWithSpacesBetween(String input) {
         String inputCopy = input;
 
         for (Pair<String, String> sub : SUBSTITUTIONS) {

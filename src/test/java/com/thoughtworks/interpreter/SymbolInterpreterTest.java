@@ -46,6 +46,7 @@ public class SymbolInterpreterTest {
 
     @Test
     public void shouldIntepretValidSymbol() {
+        // Breaking SRP (i.e. one assertion per test) due to the sheer number of permutations
         for (Pair<String, BigDecimal> pair : VALID_SYMBOLS) {
             assertThat(pair.getValue(), is(equalTo(symbolInterpreter.interpret(pair.getKey()))));
         }
@@ -55,6 +56,7 @@ public class SymbolInterpreterTest {
     public void shouldThrowExceptionForIllegalSymbol() {
         int count = 0;
 
+        // Breaking SRP (i.e. one assertion per test) due to the sheer number of permutations
         for (String symbol : INVALID_SYMBOLS) {
             try {
                 symbolInterpreter.interpret(symbol);

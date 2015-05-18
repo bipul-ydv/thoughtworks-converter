@@ -6,7 +6,6 @@ import com.thoughtworks.repository.SymbolRepository;
 import com.thoughtworks.util.RepositoryUtil;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class CreditWriter implements Writer {
@@ -21,13 +20,16 @@ public class CreditWriter implements Writer {
         symbolInterpreter = new SymbolInterpreter();
     }
 
+    // Messy, would like to refactor into smaller functions but heavily intertwined steps
     public void process(String input) {
-        String arguments = extractVariablesFromInput(input);
-        String[] argumentArray = arguments.split(DELIMITER);
+        String argumentString = extractVariablesFromInput(input);
+
+        String[] argumentArray = argumentString.split(DELIMITER);
         String key = argumentArray[argumentArray.length - 1];
         String[] variables = Arrays.copyOfRange(argumentArray, 0, argumentArray.length - 1);
         String symbols = RepositoryUtil.lookupSymbolsFromVariables(symbolRepository, variables);
-        writeOutput(arguments, key, symbols);
+
+        writeOutput(argumentString, key, symbols);
     }
 
     private String extractVariablesFromInput(String input) {
